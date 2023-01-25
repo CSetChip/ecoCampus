@@ -3,6 +3,7 @@ package com.GerenciadorDePessoas.GenrenciadorApp.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.io.Serializable;
@@ -20,13 +21,16 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NonNull
     @Column
     private String nome;
 
+    @NonNull
     @Column
     private int dataDeNascimento;
 
+    @NonNull
     @JoinColumn(name = "endereco_id")
-    private Endereco endereco;
+    private Endereco enderecoPrincipal;
 
 }

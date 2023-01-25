@@ -3,6 +3,7 @@ package com.GerenciadorDePessoas.GenrenciadorApp.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.io.Serializable;
@@ -20,15 +21,18 @@ public class Endereco implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NonNull
     @Column
     private String logradouro;
 
+    @NonNull
     @Column
     private int CEP;
 
     @Column
     private int numero;
 
+    @NonNull
     @Column
     private String cidade;
 
