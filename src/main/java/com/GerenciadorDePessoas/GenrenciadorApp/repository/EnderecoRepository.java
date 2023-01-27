@@ -1,7 +1,7 @@
 package com.GerenciadorDePessoas.GenrenciadorApp.repository;
 
 import com.GerenciadorDePessoas.GenrenciadorApp.models.Endereco;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EnderecoRepository extends CrudRepository<Endereco, Long> {
+public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 }

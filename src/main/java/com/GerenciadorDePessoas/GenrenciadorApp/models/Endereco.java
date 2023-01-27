@@ -1,10 +1,8 @@
 package com.GerenciadorDePessoas.GenrenciadorApp.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -13,6 +11,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Entity(name = "endereco")
 @Table(name = "TB_ENDERECO")
+@NoArgsConstructor
 public class Endereco implements Serializable {
 
     private static final long serealVersionUID = 1L;
@@ -21,7 +20,7 @@ public class Endereco implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NonNull
+    @NotBlank
     @Column
     private String logradouro;
 
@@ -29,10 +28,11 @@ public class Endereco implements Serializable {
     @Column
     private int CEP;
 
+    @NonNull
     @Column
     private int numero;
 
-    @NonNull
+    @NotBlank
     @Column
     private String cidade;
 
