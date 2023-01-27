@@ -1,5 +1,7 @@
 package com.GerenciadorDePessoas.GenrenciadorApp.testServers;
 
+import com.GerenciadorDePessoas.GenrenciadorApp.Controller.GerenciadorController;
+import com.GerenciadorDePessoas.GenrenciadorApp.Exceptions.IdNotFoundException;
 import com.GerenciadorDePessoas.GenrenciadorApp.models.Pessoa;
 import com.GerenciadorDePessoas.GenrenciadorApp.repository.PessoaRepository;
 import org.junit.jupiter.api.Test;
@@ -7,11 +9,14 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -21,13 +26,29 @@ public class GerenciadorServiceTest {
     private TestRestTemplate testRestTemplate;
 
     @Autowired
+    private GerenciadorController gerenciadorController;
+
+    @Autowired
     private PessoaRepository pessoaRepository;
 
     @Test
     public void buscaTodasAsPessoas() {
-        ResponseEntity<Pessoa[]> response = this.testRestTemplate
-                .exchange("/listar", HttpMethod.GET, null, Pessoa[].class);
+        ResponseEntity<List<Pessoa>> response = gerenciadorController.getListaPessoas();
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+    }
+
+    @Test
+    public void bucarPessoaComIdValido(){
+        pessoaRepository.save(new Pessoa(1,"beatriz", LocalDate.parse("2018-01-01"),null));
+
+        ResponseEntity<Pessoa> response = gerenciadorController.buscarPessoa(1L);
 
         assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertEquals(response.getBody().getId(), 1);
+    }
+
+    @Test
+    public void buscarPessoaComIdInvalido(){
+        assertThrows(IdNotFoundException.class, () -> gerenciadorController.buscarPessoa(2L));
     }
 }
