@@ -1,18 +1,23 @@
 package com.GerenciadorDePessoas.GenrenciadorApp.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NonNull;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
 
+@Entity(name = "pessoa")
+@Table(name = "TB_PESSOA")
 @Getter
 @Setter
 @AllArgsConstructor
-@Entity(name = "pessoa")
-@Table(name = "TB_PESSOA")
+@NoArgsConstructor
 public class Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,16 +26,15 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NonNull
+    @NotBlank
     @Column
     private String nome;
 
-    @NonNull
+    @NotNull
     @Column
-    private int dataDeNascimento;
+    private LocalDate dataDeNascimento;
 
-    @NonNull
-    @JoinColumn(name = "endereco_id")
-    private Endereco enderecoPrincipal;
+    @OneToMany
+    private List<Endereco> enderecos;
 
 }
