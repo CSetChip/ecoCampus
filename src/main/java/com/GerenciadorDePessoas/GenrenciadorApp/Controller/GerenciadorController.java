@@ -2,12 +2,12 @@ package com.GerenciadorDePessoas.GenrenciadorApp.Controller;
 
 import com.GerenciadorDePessoas.GenrenciadorApp.Servers.GerenciadorService;
 import com.GerenciadorDePessoas.GenrenciadorApp.models.Pessoa;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +26,12 @@ public class GerenciadorController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Pessoa> buscarPessoa(@PathVariable Long id){
         return ResponseEntity.ok().body(gerenciadorService.buscarPessoaPorId(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Pessoa> cadastrarPessoa(@Valid @RequestBody Pessoa pessoa){
+        gerenciadorService.cadastrarPessoa(pessoa);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
     }
 
 }
