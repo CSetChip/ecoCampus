@@ -22,4 +22,8 @@ public class GerenciadorService {
         return pessoaRepository.findById(id).orElseThrow(() -> new IdNotFoundException("Id não encontrado: " + id));
     }
 
+    public Pessoa cadastrarPessoa(Pessoa pessoa){
+        return pessoaRepository.save(pessoa);
+    }
+
 }
