@@ -30,8 +30,12 @@ public class GerenciadorController {
 
     @PostMapping
     public ResponseEntity<Pessoa> cadastrarPessoa(@Valid @RequestBody Pessoa pessoa){
-        gerenciadorService.cadastrarPessoa(pessoa);
-        return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
+        return ResponseEntity.status(HttpStatus.CREATED).body(gerenciadorService.salvarpessoa(pessoa));
+    }
+
+    @PutMapping("/atualizar")
+    public ResponseEntity<Pessoa> atualizarDados(@Valid @RequestBody Pessoa pessoa){
+        return ResponseEntity.ok().body(gerenciadorService.salvarpessoa(pessoa));
     }
 
 }

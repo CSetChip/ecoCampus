@@ -73,5 +73,19 @@ public class GerenciadorServiceTest {
         assertEquals(response.getStatusCode(), HttpStatus.CREATED);
     }
 
+    @Test
+    public void  atualizarDadosDeUmaPessoa(){
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(1);
+        pessoa.setNome("Larissa");
+        pessoa.setDataDeNascimento(LocalDate.parse("2001-12-04"));
+
+        ResponseEntity<Pessoa> response = gerenciadorController.atualizarDados(pessoa);
+
+        assertEquals(response.getBody().getNome(), "Larissa");
+        assertEquals(response.getBody().getId(), 1);
+        assertEquals(response.getBody().getDataDeNascimento(), LocalDate.parse("2001-12-04"));
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+    }
 
 }
