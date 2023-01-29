@@ -20,7 +20,7 @@ public class GerenciadorController {
 
     @GetMapping
     public ResponseEntity<List<Pessoa>> getListaPessoas() {
-        return ResponseEntity.ok().body(this.gerenciadorService.listarPessoas());
+        return ResponseEntity.ok().body(gerenciadorService.listarPessoas());
     }
 
     @GetMapping(value = "/{id}")
