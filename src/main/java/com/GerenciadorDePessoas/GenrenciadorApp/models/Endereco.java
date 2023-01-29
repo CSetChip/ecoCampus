@@ -2,7 +2,10 @@ package com.GerenciadorDePessoas.GenrenciadorApp.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -24,11 +27,10 @@ public class Endereco implements Serializable {
     @Column
     private String logradouro;
 
-    @NonNull
+    @NotBlank
     @Column
-    private int CEP;
+    private String CEP;
 
-    @NonNull
     @Column
     private int numero;
 

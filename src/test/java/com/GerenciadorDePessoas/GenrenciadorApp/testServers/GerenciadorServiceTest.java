@@ -3,16 +3,13 @@ package com.GerenciadorDePessoas.GenrenciadorApp.testServers;
 import com.GerenciadorDePessoas.GenrenciadorApp.Controller.GerenciadorController;
 import com.GerenciadorDePessoas.GenrenciadorApp.Exceptions.IdNotFoundException;
 import com.GerenciadorDePessoas.GenrenciadorApp.models.Pessoa;
-import com.GerenciadorDePessoas.GenrenciadorApp.repository.PessoaRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,19 +22,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class GerenciadorServiceTest {
 
     @Autowired
-    private TestRestTemplate testRestTemplate;
-
-    @Autowired
     private GerenciadorController gerenciadorController;
-
-    @Autowired
-    private PessoaRepository pessoaRepository;
-
-    private Pessoa pessoa;
 
     @BeforeAll
     public void inicializar(){
-        pessoaRepository.save(new Pessoa(1,"beatriz", LocalDate.parse("2018-01-01"),null));
+        gerenciadorController.cadastrarPessoa(new Pessoa(1, "beatriz", LocalDate.parse("2018-01-01"), null));
     }
 
     @Test

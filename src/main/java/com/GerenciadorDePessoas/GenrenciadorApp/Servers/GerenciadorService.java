@@ -15,7 +15,7 @@ public class GerenciadorService {
     private PessoaRepository pessoaRepository;
 
     public List<Pessoa> listarPessoas() {
-        return this.pessoaRepository.findAll();
+        return pessoaRepository.findAll();
     }
 
     public Pessoa buscarPessoaPorId(Long id){
