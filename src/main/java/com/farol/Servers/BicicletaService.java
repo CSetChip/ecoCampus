@@ -13,32 +13,37 @@ public class BicicletaService {
     @Autowired
     private BicicletaRepository bicicletaRepository;
 
-    public void listarBicicletas() {
-        List<Bicicleta> listaDeBicicletas =  bicicletaRepository.findAll();
+    @Autowired
+    private GereciadorDadosService gereciadorDadosService;
 
-        System.out.println("Lista de Bicicletas:");
-        for (Bicicleta bicicleta : listaDeBicicletas) {
-            System.out.println("Marca: " + bicicleta.getMarca() + "\n" +
-                    "Modelo: " + bicicleta.getModelo() + "\n" +
-                    "Cor: " + bicicleta.getCor() + "\n" +
-                    "Ano: " + bicicleta.getAno() + "\n");
-        }
+    public List<Bicicleta> listarBicicletas() {
+        return bicicletaRepository.findAll();
     }
 
-    public void salvarBicicleta(Scanner leitor){
-        Bicicleta bicicleta = new Bicicleta();
 
-        System.out.println("********* Cadastro De Bicicleta *********");
-        System.out.println("Marca:");
-        bicicleta.setMarca(leitor.nextLine());
-        System.out.println("Modelo:");
-        bicicleta.setModelo(leitor.nextLine());
-        System.out.println("Cor:");
-        bicicleta.setCor(leitor.nextLine());
-        System.out.println("Ano:");
-        bicicleta.setAno(Integer.parseInt(leitor.nextLine()));
+    public Bicicleta salvarBicicleta(Bicicleta bicicleta){
+        return bicicletaRepository.save(bicicleta);
+
+    }
+
+    public Bicicleta buscarBicicletaPorId(Long id) throws Exception {
+        return bicicletaRepository.findById(id).orElseThrow(() -> new Exception("Id não encontrado: " + id));
+    }
+
+    public Bicicleta atualizarBicicleta(Long id, Bicicleta novaBicicleta) throws Exception {
+        Bicicleta bicicleta = buscarBicicletaPorId(id);
+
+        bicicleta.setMarca(novaBicicleta.getMarca());
+        bicicleta.setModelo(novaBicicleta.getModelo());
+        bicicleta.setCor(novaBicicleta.getCor());
+        bicicleta.setAno(novaBicicleta.getAno());
 
         bicicletaRepository.save(bicicleta);
+        return bicicleta;
+    }
+
+    public void deletarBicicleta(Long id) throws Exception {
+        bicicletaRepository.deleteById(buscarBicicletaPorId(id).getId());
     }
 
 }

@@ -1,58 +1,47 @@
 package com.farol.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
+@AllArgsConstructor
 @Entity
-@Table(name = "Bicicleta")
+@Table(name = "bicicleta")
 public class Bicicleta implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
     private long id;
 
+    @Column(length = 50)
     private String marca;
+
+    @Column(length = 50)
     private String modelo;
+
+    @Column(length = 20)
     private String Cor;
+
+    @Column
     private Integer ano;
 
-    public Bicicleta() {}
+    @Column(name = "diponivel", nullable = false)
+    private boolean diponivel;
 
-    public long getId() {
-        return id;
+    @ManyToOne
+    @JoinColumn(name = "ponto_acesso_id")
+    private PontoAcesso pontoAcesso;
+
+    public Bicicleta() {
+        this.diponivel = true;
     }
 
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getModelo() {
-        return modelo;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public String getCor() {
-        return Cor;
-    }
-
-    public void setCor(String cor) {
-        Cor = cor;
-    }
-
-    public Integer getAno() {
-        return ano;
-    }
-
-    public void setAno(Integer ano) {
-        this.ano = ano;
-    }
 }
