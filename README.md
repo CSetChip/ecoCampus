@@ -4,7 +4,7 @@
   <img src="https://github.com/CSetChip/ecoCampus/blob/master/img/ecoCampus.jpg?raw=true" alt="EcoCampus" style="width: 200px; height: 200px;">
 </p>
 
-### EcoCycle é o seu companheiro de mobilidade sustentável dentro do campus universitário. Com EcoCycle, os alunos têm acesso rápido e conveniente a bicicletas compartilhadas, tornando suas viagens entre os polos da faculdade e além mais ágeis, econômicas e amigáveis ao meio ambiente.
+### EcoCampus é o seu companheiro de mobilidade sustentável dentro do campus universitário. Com EcoCampus, os alunos têm acesso rápido e conveniente a bicicletas compartilhadas, tornando suas viagens entre os polos da faculdade e além mais ágeis, econômicas e amigáveis ao meio ambiente.
 
 ## Recursos Principais:
 
