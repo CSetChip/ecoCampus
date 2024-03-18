@@ -1,4 +1,4 @@
-package com.farol.models;
+package br.edu.ifpb.dac.ecoCampus.model.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,27 +9,32 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @Entity
-@Table(name = "estudante")
-public class Estudante {
+@Table(name = "tb_student")
+public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private long id;
 
     @Column(unique = true, nullable = false)
-    private int matricula;
+    private int registration;
+
+    @Column(nullable = false)
+    private String password;
 
     @Column(length = 50, nullable = false)
-    private String nome;
+    private String name;
 
     @Column(length = 25)
-    private String instituicao;
+    private String institution;
 
     @Column
     private String email;
 
     @Column
-    private int numero;
+    private int number;
 
-    public Estudante() {}
+
+    public Student() {
+    }
 }
